@@ -9,7 +9,7 @@
         background-image: url(https://images.pexels.com/photos/270360/pexels-photo-270360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
         background-attachment: center;
         background-size: cover;
-        background-repeat: none;
+        background-repeat: no-repeat;
       }
 
       #container {
@@ -37,8 +37,11 @@
         outline: none;
         opacity: 1;
       }
-      .active {
+      .pass {
         background-color: lightgreen;
+      }
+      .fail{
+        background-color: rgba(233, 76, 107, 0.753);
       }
       h1 {
         text-align: center;
@@ -46,9 +49,8 @@
         border-radius: 10px;
         max-width: 50%;
         margin: 10px auto 20px;
-        
       }
-     @media only screen and (max-width: 600px){
+      @media only screen and (max-width: 600px){
         h1{
           font-size:15px;
         }
@@ -63,6 +65,7 @@
           background-image: url(https://fsa.zobj.net/crop.php?r=1AColHPLnB4VNicU9v3YFiKPHM3tPcZG0g6YQpD75anwbqXmriaBRyXu-4sz1ugWZM_EYPJyFqEjW1USsLTTV3y3rovCJ4ZAvHAmw_nhVSqNM4mvH2zmTK0sYXSn7I87hwYL6IUhix_ilmo7OQk-DQYhj2fh27PtV6E_nsl0lg8xPOuQhJNfuAFJ17e_KRNrdx22xI8BT2_zWbcX);
           height: 125vh;
         }
+      }
     </style>
   </head>
   <body>
@@ -174,9 +177,13 @@
     <script>
       for(var i=1;i<=100;i++)
       {
-          if(localStorage.getItem(i)=='y')
+          if(localStorage.getItem(i)=='p')
           {
-              document.getElementById(i).classList.add("active");
+              document.getElementById(i).classList.add("pass");
+          }
+          if(localStorage.getItem(i)=='f')
+          {
+              document.getElementById(i).classList.add("fail");
           }
       }
       function myFunction(c) {
@@ -185,12 +192,18 @@
         //      active: document.getElementById(c).classList.contains("active"),
         //    }
         //    );
-        if (document.getElementById(c).classList.contains("active")) {
-          document.getElementById(c).classList.remove("active");
+        if (document.getElementById(c).classList.contains("pass")) {
+          document.getElementById(c).classList.remove("pass");
+          localStorage.setItem(c,'f');
+          document.getElementById(c).classList.add("fail");
+        } 
+        else if (document.getElementById(c).classList.contains("fail")) {
+          document.getElementById(c).classList.remove("fail");
           localStorage.setItem(c,'n');
-        } else {
-          document.getElementById(c).classList.add("active");
-          localStorage.setItem(c,'y');
+        }
+        else {
+          document.getElementById(c).classList.add("pass");
+          localStorage.setItem(c,'p');
         }
       }
     </script>
